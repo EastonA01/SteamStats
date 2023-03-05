@@ -6,13 +6,14 @@ import ConfirmRemovalModal from "./ConfirmRemovalModal";
 
 export default function PlayerList(props) {
     const players = props.players;
+    console.log(players)
     return (
         <Table dark>
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Registration</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Completed?</th>
                     <th></th>
                 </tr>
             </thead>
@@ -24,20 +25,20 @@ export default function PlayerList(props) {
                         </td>
                     </tr>
                 ) : (
-                    players.map(player => (
-                        <tr key={player.pk}>
-                            <td>{player.name}</td>
-                            <td>{player.email}</td>
-                            <td>{player.registrationDate}</td>
+                    players.map(hub => (
+                        <tr key={hub.pk}>
+                            <td>{hub.title}</td>
+                            <td>{hub.description}</td>
+                            <td>{hub.completed + ""}</td>
                             <td align="center">
                                 <NewPlayerModal
                                     create={false}
-                                    player={player}
+                                    hub={hub}
                                     resetState={props.resetState}
                                 />
                                 &nbsp;&nbsp;
                                 <ConfirmRemovalModal
-                                    pk={player.pk}
+                                    pk={hub.pk}
                                     resetState={props.resetState}
                                 />
                             </td>

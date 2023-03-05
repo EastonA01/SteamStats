@@ -13,10 +13,10 @@ export default function NewPlayerModal(props) {
 
     const create = props.create;
 
-    var title = "Editing Player";
+    var title = "Editing Item";
     var button = <Button onClick={toggle}>Edit</Button>;
     if (create) {
-        title = "Creating New Player";
+        title = "Adding an Item";
 
         button = (
             <Button

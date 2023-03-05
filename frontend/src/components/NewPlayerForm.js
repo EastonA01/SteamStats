@@ -8,19 +8,19 @@ import { API_URL } from "../constants";
 export default function NewPlayerForm(props) {
     const [player, setPlayer] = useState({
         pk: 0,
-        name: "",
-        email: "",
+        title: "",
+        description: "",
     })
 
     useEffect(() => {
         if (props.player) {
-            const { pk, name, email } = props.player;
-            setPlayer({ pk, name, email });
+            const { pk, title, description } = props.player;
+            setPlayer({ pk, title, description });
         }
     }, [props.player])
 
     const onChange = e => {
-        setPlayer(prev => ({ ...prev, ...{ [e.target.name]: e.target.value } }));
+        setPlayer(prev => ({ ...prev, ...{ [e.target.title]: e.target.value } }));
     };
 
     const createPlayer = e => {
@@ -46,21 +46,21 @@ export default function NewPlayerForm(props) {
     return (
         <Form onSubmit={props.player ? editPlayer : createPlayer}>
             <FormGroup>
-                <Label for="name">Name:</Label>
+                <Label for="title">Name:</Label>
                 <Input
                     type="text"
-                    name="name"
+                    title="title"
                     onChange={onChange}
-                    value={defaultIfEmpty(player.name)}
+                    value={defaultIfEmpty(player.title)}
                 />
             </FormGroup>
             <FormGroup>
-                <Label for="email">Email:</Label>
+                <Label for="description">Email:</Label>
                 <Input
-                    type="email"
-                    name="email"
+                    type="description"
+                    title="description"
                     onChange={onChange}
-                    value={defaultIfEmpty(player.email)}
+                    value={defaultIfEmpty(player.description)}
                 />
             </FormGroup>
             <Button>Send</Button>

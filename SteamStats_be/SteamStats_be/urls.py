@@ -24,4 +24,6 @@ router.register(r'hub', views.HubView, 'hub')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/friends/<str:steam_id>/', views.user_friends),
+    path('api/user/<str:steam_id>/', views.user_summary)
 ]

@@ -15,6 +15,11 @@ export default function Home(props) {
     const getPlayers = () => {
         axios.get(API_URL).then(res => setPlayers(res.data));
     };
+    // Function below is equivalent to above function
+    function getPlayers2 ()
+    {
+        axios.get(API_URL).then(res => setPlayers(res.data));
+    }
 
     const resetState = () => {
         getPlayers();

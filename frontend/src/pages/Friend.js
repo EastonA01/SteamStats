@@ -6,13 +6,17 @@ import moment from 'moment'
 
 export default function Friend() {
     const [friend, setFriend] = useState([])
+    const [steamID, setSteamID] = useState("");
 
-    useEffect(() => {
-        getFriend()
-    }, [])
+    // useEffect(() => {
+    //     getFriend()
+    // }, [])
 
     function getFriend() {
-        axios.get(API_RAW + "friends/76561198152156381/")
+        console.log("steamID", steamID)
+        if (!steamID)
+            return
+        axios.get(API_RAW + `friends/${steamID}/`)
             .then(res => {
                 let tempList = []
                 res.data.forEach(
@@ -33,6 +37,14 @@ export default function Friend() {
 
     return (
         <div className="App">
+            <label>Enter your SteamID:
+                <input
+                    type="text"
+                    value={steamID}
+                    onChange={(e) => setSteamID(e.target.value)}
+                />
+                <button onClick={() => getFriend()}>GO!!!!</button>
+            </label>
             <table>
                 <th></th>
                 <th>Username</th>

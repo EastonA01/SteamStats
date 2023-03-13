@@ -59,6 +59,16 @@ def user_games(request, steam_id):
 
         return Response(status=status.HTTP_200_OK, data=data)
     
+@api_view(['GET'])
+def recently_played(request, steam_id):
+    if request.method == 'GET':
+        if steam_id == "":
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        url = f'/IPlayerService/GetRecentlyPlayedGames/v0001/?key={api_key}&steamid={steam_id}&format=json'
+        data = network_request(url)
+
+        return Response(status=status.HTTP_200_OK, data=data)    
+    
 
 #  ======================= HELPER FUNCTIONS =======================
 def network_request(endpoint):
@@ -90,3 +100,5 @@ def findUser(id, lst):
 class HubView(viewsets.ModelViewSet):
     serializer_class = HubSerializer
     queryset = Hub.objects.all()
+
+

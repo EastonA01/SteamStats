@@ -43,3 +43,20 @@ th,
 td {
   border: 1px solid black;
 }
+
+
+.menu button {
+  background-color: white;
+  align-items: center;
+  border: 2px solid black;
+}
+
+.menu a {
+  color: darkviolet;
+  font-size: 2em;
+}
+
+.menu {
+  align-content: center;
+  text-align: center;
+}

@@ -17,19 +17,22 @@ export default function OwnedGames() {
                 const gamesArr = res.data.response.games.sort((a, b) => { return b.playtime_forever - a.playtime_forever })
                 let tempList = []
                 //CREATE THE HEADERS
-                Object.keys(gamesArr[0]).forEach(key => {
+                const headers = Object.keys(gamesArr[0])
+                headers.forEach(key => {
                     tempList.push(<th>{key}</th>)
                 })
                 //CREATE THE ROWS
+                const has_recents = headers.includes('playtime_2weeks')
+                const has_com_guidelines = headers.includes('has_community_visible_stats')
                 gamesArr.forEach(
                     i => {
                         tempList.push(<tr>
                             <td>{i.appid}</td>
                             <td>{i.name}</td>
-                            <td>{minutesToHHmm(i.playtime_2weeks)}</td>
+                            {has_recents ? <td>{minutesToHHmm(i.playtime_2weeks)}</td> : null}
                             <td>{minutesToHHmm(i.playtime_forever)}</td>
                             <td><img src={`http://media.steampowered.com/steamcommunity/public/images/apps/${i.appid}/${i.img_icon_url}.jpg`} /></td>
-                            <td>{i.has_community_visible_stats + ""}</td>
+                            {has_com_guidelines ? <td>{i.has_community_visible_stats + ""}</td> : null}
                             <td>{minutesToHHmm(i.playtime_windows_forever)}</td>
                             <td>{minutesToHHmm(i.playtime_mac_forever)}</td>
                             <td>{minutesToHHmm(i.playtime_linux_forever)}</td>

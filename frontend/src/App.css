@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  text-align: -webkit-center;
+  margin: 0 5px;
 }
 
 .App-logo {
@@ -44,6 +46,11 @@ td {
   border: 1px solid black;
 }
 
+.menu {
+  align-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
 
 .menu button {
   background-color: white;
@@ -53,10 +60,5 @@ td {
 
 .menu a {
   color: darkviolet;
-  font-size: 2em;
-}
-
-.menu {
-  align-content: center;
-  text-align: center;
+  font-size: 2rem;
 }

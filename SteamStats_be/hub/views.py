@@ -53,8 +53,8 @@ def user_games(request, steam_id):
     if request.method == 'GET':
         if steam_id == "":
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
-        url = f'/ISteamUser/GetFriendList/v0001/?key={api_key}&steamid={steam_id}&relationship=friend'
+        
+        url = f'/IPlayerService/GetOwnedGames/v0001/?key={api_key}&steamid={steam_id}&include_appinfo=true&include_played_free_games=true&format=json'
         data = network_request(url)
 
         return Response(status=status.HTTP_200_OK, data=data)

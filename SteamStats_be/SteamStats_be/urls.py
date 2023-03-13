@@ -26,5 +26,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/friends/<str:steam_id>/', views.user_friends),
     path('api/user/<str:steam_id>/', views.user_summary),
-    path('api/recentlyPlayed/<str:steam_id>/', views.recently_played)
+    path('api/recentlyPlayed/<str:steam_id>/', views.recently_played),
+    path('api/ownedGames/<str:steam_id>/', views.user_games)
 ]

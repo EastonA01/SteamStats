@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-import { API_RAW } from "../constants";
+
+import { API_RAW, minutesToHHmmss } from "../constants";
 
 
 export default function RecentlyPlayed() {
@@ -17,7 +18,31 @@ export default function RecentlyPlayed() {
     function getRecentlyPlayedGames() {
         if (!steamID)
             return
-        axios.get(API_RAW + `recentlyPlayed/${steamID}/`).then(res => setUser(res.data));
+        axios.get(API_RAW + `recentlyPlayed/${steamID}/`)
+            .then(res => {
+                const userArr = res.data.response.games
+                let tempList = []
+                //CREATE THE HEADERS
+                Object.keys(userArr[0]).forEach(key => {
+                    tempList.push(<th>{key}</th>)
+                })
+                //CREATE THE ROWS
+                userArr.forEach(
+                    i => {
+                        tempList.push(<tr>
+                            <td>{i.appid}</td>
+                            <td>{i.name}</td>
+                            <td>{minutesToHHmmss(i.playtime_2weeks)}</td>
+                            <td>{minutesToHHmmss(i.playtime_forever)}</td>
+                            <td><img src={`http://media.steampowered.com/steamcommunity/public/images/apps/${i.appid}/${i.img_icon_url}.jpg`} /></td>
+                            <td>{minutesToHHmmss(i.playtime_windows_forever)}</td>
+                            <td>{minutesToHHmmss(i.playtime_mac_forever)}</td>
+                            <td>{minutesToHHmmss(i.playtime_linux_forever)}</td>
+                        </tr>)
+                    }
+                )
+                setUser(tempList)
+            });
     }
 
 
@@ -34,7 +59,9 @@ export default function RecentlyPlayed() {
                 />
                 <button onClick={() => getRecentlyPlayedGames()}>GO!!!!</button>
             </label>
-            <h3>{JSON.stringify(user)}</h3>
+            <table>
+                {user}
+            </table>
 
         </div>
     )

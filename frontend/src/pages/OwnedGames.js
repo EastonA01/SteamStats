@@ -1,7 +1,7 @@
 import axios from "axios";
 import moment from 'moment';
 import React, { useState } from "react";
-import { API_RAW, minutesToHHmmss } from "../constants";
+import { API_RAW, minutesToHHmm } from "../constants";
 
 
 export default function OwnedGames() {
@@ -26,12 +26,13 @@ export default function OwnedGames() {
                         tempList.push(<tr>
                             <td>{i.appid}</td>
                             <td>{i.name}</td>
-                            <td>{minutesToHHmmss(i.playtime_forever)}</td>
+                            <td>{minutesToHHmm(i.playtime_2weeks)}</td>
+                            <td>{minutesToHHmm(i.playtime_forever)}</td>
                             <td><img src={`http://media.steampowered.com/steamcommunity/public/images/apps/${i.appid}/${i.img_icon_url}.jpg`} /></td>
                             <td>{i.has_community_visible_stats + ""}</td>
-                            <td>{minutesToHHmmss(i.playtime_windows_forever)}</td>
-                            <td>{minutesToHHmmss(i.playtime_mac_forever)}</td>
-                            <td>{minutesToHHmmss(i.playtime_linux_forever)}</td>
+                            <td>{minutesToHHmm(i.playtime_windows_forever)}</td>
+                            <td>{minutesToHHmm(i.playtime_mac_forever)}</td>
+                            <td>{minutesToHHmm(i.playtime_linux_forever)}</td>
                             <td>{moment.unix(i.rtime_last_played).format('MMMM Do YYYY, h:mm:ss a')}</td>
                         </tr>)
                     }

@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 
-import { API_RAW, minutesToHHmmss } from "../constants";
+import { API_RAW, minutesToHHmm } from "../constants";
 
 
 export default function RecentlyPlayed() {
@@ -32,12 +32,12 @@ export default function RecentlyPlayed() {
                         tempList.push(<tr>
                             <td>{i.appid}</td>
                             <td>{i.name}</td>
-                            <td>{minutesToHHmmss(i.playtime_2weeks)}</td>
-                            <td>{minutesToHHmmss(i.playtime_forever)}</td>
+                            <td>{minutesToHHmm(i.playtime_2weeks)}</td>
+                            <td>{minutesToHHmm(i.playtime_forever)}</td>
                             <td><img src={`http://media.steampowered.com/steamcommunity/public/images/apps/${i.appid}/${i.img_icon_url}.jpg`} /></td>
-                            <td>{minutesToHHmmss(i.playtime_windows_forever)}</td>
-                            <td>{minutesToHHmmss(i.playtime_mac_forever)}</td>
-                            <td>{minutesToHHmmss(i.playtime_linux_forever)}</td>
+                            <td>{minutesToHHmm(i.playtime_windows_forever)}</td>
+                            <td>{minutesToHHmm(i.playtime_mac_forever)}</td>
+                            <td>{minutesToHHmm(i.playtime_linux_forever)}</td>
                         </tr>)
                     }
                 )

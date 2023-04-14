@@ -1,12 +1,22 @@
 import axios from "axios";
 import moment from 'moment';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API_RAW, minutesToHHmm } from "../constants";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 export default function OwnedGames() {
     const [ownedList, setOwnedList] = useState([])
     const [steamID, setSteamID] = useState("");
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setSteamID(location?.state?.id)
+    }, [location])
+    useEffect(() => {
+        getOwnedGames()
+    }, [steamID])
 
     function getOwnedGames() {
         if (!steamID)
@@ -49,6 +59,7 @@ export default function OwnedGames() {
         <div className="App">
             <label>Enter your SteamID:
                 <input
+                    className="inputBox"
                     type="text"
                     value={steamID}
                     onChange={(e) => setSteamID(e.target.value)}

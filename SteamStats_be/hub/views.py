@@ -14,6 +14,8 @@ api_key = "7E41DC1C095AF9C5D643BF7DAA81C46D"
 api_endpoint = "http://api.steampowered.com"
 
 #  ======================= API FUNCTIONS =======================
+
+
 @api_view(['GET'])
 def user_friends(request, steam_id):
     if request.method == 'GET':
@@ -33,10 +35,13 @@ def user_friends(request, steam_id):
                 "friend_since": i['friend_since'],
             }
             tmpEntry2 = findUser(i['steamid'], data2["response"]["players"])
+            if(tmpEntry2 == None):
+                    continue
             tmpEntry.update(tmpEntry2)
             mergedData.append(tmpEntry)
 
         return Response(status=status.HTTP_200_OK, data=mergedData)
+
 
 @api_view(['GET'])
 def user_summary(request, steam_id):
@@ -47,18 +52,20 @@ def user_summary(request, steam_id):
         data = network_request(url)
 
         return Response(status=status.HTTP_200_OK, data=data)
-    
+
+
 @api_view(['GET'])
 def user_games(request, steam_id):
     if request.method == 'GET':
         if steam_id == "":
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        
+
         url = f'/IPlayerService/GetOwnedGames/v0001/?key={api_key}&steamid={steam_id}&include_appinfo=true&include_played_free_games=true&format=json'
         data = network_request(url)
 
         return Response(status=status.HTTP_200_OK, data=data)
-    
+
+
 @api_view(['GET'])
 def recently_played(request, steam_id):
     if request.method == 'GET':
@@ -67,8 +74,19 @@ def recently_played(request, steam_id):
         url = f'/IPlayerService/GetRecentlyPlayedGames/v0001/?key={api_key}&steamid={steam_id}&format=json'
         data = network_request(url)
 
-        return Response(status=status.HTTP_200_OK, data=data)    
-    
+        return Response(status=status.HTTP_200_OK, data=data)
+
+
+@api_view(['GET'])
+def user_stats(request, steam_id, game_id):
+    if request.method == 'GET':
+        if steam_id == "":
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        url = f'/ISteamUserStats/GetUserStatsForGame/v2/?appid={game_id}&key={api_key}&steamid={steam_id}/'
+        data = network_request(url)
+
+        return Response(status=status.HTTP_200_OK, data=data)
+
 
 #  ======================= HELPER FUNCTIONS =======================
 def network_request(endpoint):
@@ -86,6 +104,7 @@ def network_request(endpoint):
 
     return data
 
+
 def display_scraper(response_data):
     # Loop through i in steam_id
     ids = ''
@@ -94,11 +113,11 @@ def display_scraper(response_data):
     url = f'/ISteamUser/GetPlayerSummaries/v0002/?key={api_key}&steamids={ids}'
     return network_request(url)
 
+
 def findUser(id, lst):
     return next((i for i in lst if i['steamid'] == id), None)
+
 
 class HubView(viewsets.ModelViewSet):
     serializer_class = HubSerializer
     queryset = Hub.objects.all()
-
-

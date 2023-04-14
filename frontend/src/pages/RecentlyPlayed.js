@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 import { API_RAW, minutesToHHmm } from "../constants";
@@ -8,12 +9,17 @@ import { API_RAW, minutesToHHmm } from "../constants";
 export default function RecentlyPlayed() {
     const [user, setUser] = useState([])
     const [steamID, setSteamID] = useState("")
+    const location = useLocation();
+    const navigate = useNavigate();
 
 
 
-    //useEffect(() => {
-    //     getRecentlyPlayedGames()
-    // }, [])
+    useEffect(() => {
+        setSteamID(location?.state?.id)
+    }, [location])
+    useEffect(() => {
+        getRecentlyPlayedGames()
+    }, [steamID])
 
     function getRecentlyPlayedGames() {
         if (!steamID)
@@ -34,7 +40,7 @@ export default function RecentlyPlayed() {
                             <td>{i.name}</td>
                             <td>{minutesToHHmm(i.playtime_2weeks)}</td>
                             <td>{minutesToHHmm(i.playtime_forever)}</td>
-                            <td><img src={`http://media.steampowered.com/steamcommunity/public/images/apps/${i.appid}/${i.img_icon_url}.jpg`} /></td>
+                            <td><img src={`http://media.steampowered.com/steamcommunity/public/images/apps/${i.appid}/${i.img_icon_url}.jpg`} alt="game-icon" /></td>
                             <td>{minutesToHHmm(i.playtime_windows_forever)}</td>
                             <td>{minutesToHHmm(i.playtime_mac_forever)}</td>
                             <td>{minutesToHHmm(i.playtime_linux_forever)}</td>

@@ -2,6 +2,7 @@
   text-align: center;
   text-align: -webkit-center;
   margin: 0 5px;
+  padding: 40px;
 }
 
 .App-logo {
@@ -50,6 +51,102 @@ td {
   align-content: center;
   text-align: center;
   margin-bottom: 2rem;
+  background-color: #171a21
+}
+
+.menu button {
+  background-color: #1B2838;
+  align-items: center;
+  border: 2px solid black;
+}
+
+.menu a {
+  color: #A7BACC;
+  font-size: 2rem;
+}
+
+.menu h1 {
+  align-content: left;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #A7BACC;
+}
+
+input {
+  background-color: #1B2838;
+  color: #A7BACC;
+}
+
+.goButton {
+  background-color: #1B2838;
+  color: #A7BACC;
+}
+
+.steamcolor {
+  color: #A7BACC;
+}
+
+.App {
+  text-align: center;
+  text-align: -webkit-center;
+  margin: 0 5px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom Colors */
+:root {
+  --dark-gray: #161616;
+  --darker-gray: #171717;
+  --darkest-gray: #0f0f0f;
+  --white-text: #e5e5e5;
+  --gray-text: #8e8e8e;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+.menu {
+  align-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .menu button {
@@ -62,3 +159,143 @@ td {
   color: darkviolet;
   font-size: 2rem;
 }
+
+/* DashBoard CSS START */
+.friendsTab {
+  float: right;
+  align-content: normal
+}
+
+.pfp {
+  float: left;
+}
+
+.userProfile {
+  border: 10px solid black;
+}
+
+.profile {
+  background-color: #A7BACC;
+  float: left;
+  height: fit-content;
+  width: fit-content;
+}
+
+.userInfo {
+  float: right;
+}
+
+.recentlyPlayed {
+  align-content: normal;
+}
+
+/* DashBoard CSS END */
+
+
+/* Recap Test Start */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.recap {
+  max-width: 1000px;
+  min-height: 100vh;
+  background-color: var(--dark-gray);
+  color: var(--white-text);
+}
+
+.recap-main {
+  flex: 2 2;
+  padding: 15px;
+}
+
+.recap-profile-text {
+  text-align: left;
+  margin-left: 15px;
+}
+
+.recap-aside {
+  flex: 1 1;
+  padding: 15px;
+  text-align: left;
+  /* background-color: red; */
+}
+
+.recap-owned {
+  background-color: var(--darkest-gray);
+  margin-top: 95px;
+  padding: 10px;
+}
+
+.recap-profile-pic {
+  flex: 0.5;
+}
+
+.recap-comments {
+  text-align: left;
+}
+
+.card {
+  padding: 10px;
+  background-color: var(--darkest-gray);
+  color: var(--white-text);
+  border-radius: 5px;
+  margin: 15px 0;
+}
+
+.card-header {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  flex: 1;
+}
+
+.card-desc {
+  flex: 1;
+  text-align: right;
+}
+
+.card img {
+  max-width: 150px;
+}
+
+.card-footer {
+  width: 100%;
+  display: flex;
+  background-color: var(--darker-gray);
+  border-radius: 5px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+img {
+  width: 100%;
+}
+
+.category {
+  background-color: var(--darkest-gray);
+  color: var(--gray-text);
+  justify-content: space-between;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+.lvl {
+  border: solid gold 2px;
+  border-radius: 100%;
+  width: fit-content;
+  padding: 3px;
+  background-color: black;
+  display: inline-block;
+}
+
+
+/* Recap Test End */

@@ -27,5 +27,6 @@ urlpatterns = [
     path('api/friends/<str:steam_id>/', views.user_friends),
     path('api/user/<str:steam_id>/', views.user_summary),
     path('api/recentlyPlayed/<str:steam_id>/', views.recently_played),
-    path('api/ownedGames/<str:steam_id>/', views.user_games)
+    path('api/ownedGames/<str:steam_id>/', views.user_games),
+    path('api/user_stats/<str:steam_id>/<str:game_id>/', views.user_stats)
 ]

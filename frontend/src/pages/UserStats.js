@@ -1,27 +1,20 @@
 import axios from "axios";
+import React, { useState } from "react";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
-import { API_RAW } from "../constants";
 
-export default function User() {
+import { API_RAW, minutesToHHmm } from "../constants";
+
+
+export default function UserStats() {
     const [user, setUser] = useState([])
     const [steamID, setSteamID] = useState("")
-    const location = useLocation();
-    const navigate = useNavigate();
+    const [gameID, setGameID] = useState("")
 
-    useEffect(() => {
-        setSteamID(location?.state?.id)
-    }, [location])
-    useEffect(() => {
-        getUser()
-    }, [steamID])
-
-    function getUser() {
-        axios.get(API_RAW + `user/${steamID}/`)
+    function getUserStatsGames() {
+        axios.get(API_RAW + `user_stats/${steamID}/${gameID}/`)
             .then(res => {
-                const userArr = res.data.response.players
+                const userArr = res.data.playerstats.achievements
                 let tempList = []
                 const keys = Object.keys(userArr[0])
                 console.table(keys)
@@ -40,8 +33,9 @@ export default function User() {
                                 tempCols.push(<td><img src={i[key]} /></td>)
                             } else if (key.includes('lastlogoff', 'timecreated')) {
                                 tempCols.push(<td>{moment.unix(i.timecreated).format('MMMM Do YYYY, h:mm:ss a')}</td>)
-                            } else {
-                                tempCols.push(<td>{val}</td>)
+                            }
+                            else {
+                                tempCols.push(<td>{val == 1 ? "✅" : val == 0 ? "❌" : val}</td>)
                             }
                         })
                         tempList.push(<tr>{tempCols}</tr>)
@@ -50,6 +44,9 @@ export default function User() {
                 setUser(tempList)
             });
     }
+
+
+
 
 
     return (
@@ -61,10 +58,19 @@ export default function User() {
                     onChange={(e) => setSteamID(e.target.value)}
                 />
             </label>
-            <button onClick={() => getUser()}>GO!!!!</button>
+            <label>Enter your GameID:
+                <input
+                    type="text"
+                    value={gameID}
+                    onChange={(e) => setGameID(e.target.value)}
+                />
+            </label>
+            <button onClick={() => getUserStatsGames()}>GO!!!!</button>
+
             <table>
                 {user}
             </table>
+
         </div>
     )
 
